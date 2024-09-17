@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="mainParent">
+    <input type="what would you like to do?" id="inp">
+    <button onclick="addTodo()">Add Todo</button>
+    <div id="todos"></div>
+    <script>
+        let todos = [];
+        function addTodo() {
+            todos.push({
+                title: document.querySelector("input").value
+            })
+            render();
+        }
+
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            render();
+        }
+
+        function render(){
+            document.querySelector("#todos").innerHTML = "";
+            todos.forEach ((todo, index) => {
+                let div = document.createElement("div");
+                let h3 = document.createElement("h3");
+                h3.textContent = index+". "+todo.title;
+                let button  = document.createElement("button");
+                button.innerHTML = "Delete";
+                button.setAttribute("onclick", "deleteTodo("+index+")");
+                div.appendChild(h3);
+                div.appendChild(button);
+                document.querySelector("#todos").appendChild(div);
+                
+            })
+        }
+
+        
+    </script>
+</body>
+</html>
